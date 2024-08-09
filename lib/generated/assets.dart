@@ -4,6 +4,7 @@ class Assets {
 
   static const String assetsIconsBackArrow = 'assets/icons/back_arrow.svg';
   static const String iconsBackArrow = 'assets/icons/back_arrow.svg';
+  static const String iconsVisaLogo = 'assets/icons/visa_logo.svg';
   static const String imagesApplepayment = 'assets/images/applepayment.svg';
   static const String imagesCartBag = 'assets/images/cart_bag.png';
   static const String imagesMastercard = 'assets/images/mastercard.svg';
