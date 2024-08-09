@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:payment_project/core/utils/styles.dart';
-import 'package:payment_project/features/checkout/presentation/widgets/payment_method_item.dart';
+import 'package:payment_project/features/checkout/presentation/widgets/custom_credit_card.dart';
 
 import '../widgets/payment_methods.dart';
 
@@ -21,15 +21,23 @@ class PaymentDetailsView extends StatelessWidget {
           style: AppStyles.font25BlackW500,
         ),
         centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: SvgPicture.asset('assets/icons/back_arrow.svg'),
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: SvgPicture.asset('assets/icons/back_arrow.svg'),
+          ),
         ),
       ),
-      body: const Column(
-        children: [
-          PaymentMethods(),
-        ],
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            PaymentMethods(),
+            CustomCreditCard(),
+          ],
+        ),
       )
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:payment_project/core/utils/styles.dart';
 import 'package:payment_project/features/checkout/presentation/widgets/custom_button.dart';
 
+import '../views/payment_details_view.dart';
+
 class OrderInfoBody extends StatelessWidget {
   const OrderInfoBody({super.key});
 
@@ -81,7 +83,13 @@ class OrderInfoBody extends StatelessWidget {
               ),
             ],
           ),
-          const CustomButton(),
+          CustomButton(title: 'Complete Payment',
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const PaymentDetailsView()),
+              );
+            },),
         ],
       ),
     );

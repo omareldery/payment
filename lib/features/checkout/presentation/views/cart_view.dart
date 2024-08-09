@@ -21,7 +21,9 @@ class CartView extends StatelessWidget {
         centerTitle: true,
         leading: Padding(
           padding: const EdgeInsets.all(14.0),
-          child: SvgPicture.asset('assets/icons/back_arrow.svg'),
+          child: SvgPicture.asset(
+            'assets/icons/back_arrow.svg',
+          ),
         ),
       ),
       body: Column(
@@ -39,4 +41,3 @@ class CartView extends StatelessWidget {
     );
   }
 }
-

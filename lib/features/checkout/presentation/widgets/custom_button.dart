@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:payment_project/core/utils/styles.dart';
-import 'package:payment_project/features/checkout/presentation/views/payment_details_view.dart';
-
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
-
+  const CustomButton({super.key, required this.title, required this.onTap});
+final String title;
+final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -13,10 +12,7 @@ class CustomButton extends StatelessWidget {
       width: 350,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const PaymentDetailsView()),
-          );
+          onTap();
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF34A853),
@@ -24,7 +20,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
           ),
         ), child: Text(
-        'Complete Payment',
+        title,
         style: AppStyles.font20BlackW500,
       ),
       ),
