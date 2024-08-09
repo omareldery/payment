@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
-import 'package:payment_project/features/checkout/presentation/widgets/custom_button.dart';
-
-import '../views/payment_details_view.dart';
 
 class CustomCreditCard extends StatefulWidget {
-  const CustomCreditCard({
-    super.key,
-  });
-
+  const CustomCreditCard({super.key, required this.formKey, required this.autoValidateMode,});
+  final GlobalKey<FormState> formKey;
+  final AutovalidateMode autoValidateMode;
   @override
   State<CustomCreditCard> createState() => _CustomCreditCardState();
 }
@@ -23,7 +19,6 @@ class _CustomCreditCardState extends State<CustomCreditCard> {
   String cvvCode = '';
 
   bool showBackView = false;
-  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +40,9 @@ class _CustomCreditCardState extends State<CustomCreditCard> {
           cvvCode = creditCardModel.cvvCode;
           showBackView = creditCardModel.isCvvFocused;
           setState(() {});
-        }, formKey: formKey,),
-        const SizedBox(
-          height:60,
-        ),
-        CustomButton(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const PaymentDetailsView()),
-            );
-          }, title: 'Pay',
-        )
+        }, formKey: widget.formKey,
+        autovalidateMode: widget.autoValidateMode,),
+
       ],
     );
   }

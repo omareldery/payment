@@ -18,7 +18,7 @@ class PaymentMethodItem extends StatelessWidget {
           color: Colors.white,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              width: 1,
+              width: 1.2,
               color: isSelected
                   ? const Color(
                       0xFF34A853,

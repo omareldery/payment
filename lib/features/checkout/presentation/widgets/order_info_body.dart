@@ -87,7 +87,7 @@ class OrderInfoBody extends StatelessWidget {
             onTap: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PaymentDetailsView()),
+                MaterialPageRoute(builder: (context) =>  PaymentDetailsView()),
               );
             },),
         ],

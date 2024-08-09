@@ -1,43 +1,58 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:payment_project/core/utils/styles.dart';
+import 'package:payment_project/features/checkout/presentation/widgets/custom_app_bar.dart';
+import 'package:payment_project/features/checkout/presentation/widgets/custom_button.dart';
 import 'package:payment_project/features/checkout/presentation/widgets/custom_credit_card.dart';
 
 import '../widgets/payment_methods.dart';
 
-class PaymentDetailsView extends StatelessWidget {
-  const PaymentDetailsView({super.key});
+class PaymentDetailsView extends StatefulWidget {
+ const  PaymentDetailsView({super.key});
+
+  @override
+  State<PaymentDetailsView> createState() => _PaymentDetailsViewState();
+}
+
+class _PaymentDetailsViewState extends State<PaymentDetailsView> {
+final GlobalKey<FormState> formKey = GlobalKey();
+
+AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: Text(
-          'Payment Details',
-          textAlign: TextAlign.center,
-          style: AppStyles.font25BlackW500,
-        ),
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: (){
-            Navigator.pop(context);
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: SvgPicture.asset('assets/icons/back_arrow.svg'),
+      appBar: customAppBar(title: 'Payment Details'),
+      body: CustomScrollView(
+        slivers: [
+          const SliverToBoxAdapter(
+            child: PaymentMethods(),
           ),
-        ),
-      ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            PaymentMethods(),
-            CustomCreditCard(),
-          ],
-        ),
+           SliverToBoxAdapter(
+            child: CustomCreditCard(
+              formKey: formKey, autoValidateMode: autoValidateMode,
+            ),
+          ),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Align(
+              alignment:  Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: CustomButton(title: 'Pay', onTap: (){
+                    if (formKey.currentState!.validate()) {
+                       formKey.currentState!.save();
+                       log('form is valid');
+                    }else{
+                      autoValidateMode = AutovalidateMode.always;
+                      setState(() {
+                      });
+                    }
+                  }),
+                ))
+          ),
+        ],
       )
     );
   }
